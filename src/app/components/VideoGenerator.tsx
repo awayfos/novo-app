@@ -27,7 +27,8 @@ import {
   Loader2,
   CheckCircle2,
   FileJson,
-  Zap
+  Zap,
+  TrendingUp
 } from "lucide-react"
 import { toast } from "sonner"
 import { darkStudioEngine } from "@/lib/darkstudio-engine"
@@ -122,22 +123,22 @@ export function VideoGenerator() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Painel de Configuração */}
-      <div className="lg:col-span-2 space-y-6">
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-950/90 border-gray-800/50 shadow-2xl backdrop-blur-sm">
-          <CardHeader className="border-b border-gray-800/50 pb-4">
-            <CardTitle className="flex items-center gap-2 text-white text-xl">
-              <Wand2 className="w-6 h-6 text-purple-500" />
+      <div className="lg:col-span-2 space-y-8">
+        <Card className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border-gray-800 shadow-2xl backdrop-blur-sm">
+          <CardHeader className="border-b border-gray-800 pb-6">
+            <CardTitle className="flex items-center gap-3 text-white text-2xl font-black">
+              <Wand2 className="w-7 h-7 text-purple-500" />
               Configuração do Vídeo
             </CardTitle>
-            <CardDescription className="text-gray-400">Configure os parâmetros para gerar seu vídeo dark profissional</CardDescription>
+            <CardDescription className="text-gray-400 text-base">Configure os parâmetros para gerar seu vídeo dark profissional</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6 pt-6">
+          <CardContent className="space-y-8 pt-8">
             {/* Tema/Título */}
-            <div className="space-y-2">
-              <Label htmlFor="tema" className="flex items-center gap-2 text-gray-200 text-sm font-medium">
-                <Sparkles className="w-4 h-4 text-yellow-500" />
+            <div className="space-y-3">
+              <Label htmlFor="tema" className="flex items-center gap-2 text-gray-200 text-base font-bold">
+                <Sparkles className="w-5 h-5 text-yellow-500" />
                 Tema ou Título *
               </Label>
               <Input
@@ -145,28 +146,28 @@ export function VideoGenerator() {
                 value={temaTitulo}
                 onChange={(e) => setTemaTitulo(e.target.value)}
                 placeholder="Ex: O aparelho que sussurra no ônibus"
-                className="bg-black/50 border-gray-700/50 focus:border-purple-500 text-white placeholder:text-gray-600 h-12 text-base"
+                className="bg-black/70 border-gray-700 focus:border-purple-500 text-white placeholder:text-gray-600 h-14 text-lg font-medium"
               />
             </div>
 
             {/* Descrição Adicional */}
-            <div className="space-y-2">
-              <Label htmlFor="descricao" className="text-gray-200 text-sm font-medium">Descrição Adicional (Opcional)</Label>
+            <div className="space-y-3">
+              <Label htmlFor="descricao" className="text-gray-200 text-base font-bold">Descrição Adicional (Opcional)</Label>
               <Textarea
                 id="descricao"
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
                 placeholder="Adicione detalhes sobre a história, personagens, atmosfera..."
-                className="bg-black/50 border-gray-700/50 focus:border-purple-500 min-h-[100px] text-white placeholder:text-gray-600"
+                className="bg-black/70 border-gray-700 focus:border-purple-500 min-h-[120px] text-white placeholder:text-gray-600 text-base"
               />
             </div>
 
             {/* Duração */}
-            <div className="space-y-3">
-              <Label className="flex items-center gap-2 text-gray-200 text-sm font-medium">
-                <Clock className="w-4 h-4 text-blue-500" />
-                Duração: <span className="text-purple-400 font-bold">{duration[0]} segundos</span> 
-                <span className="text-gray-500">({Math.floor(duration[0] / 60)}:{(duration[0] % 60).toString().padStart(2, '0')})</span>
+            <div className="space-y-4">
+              <Label className="flex items-center gap-2 text-gray-200 text-base font-bold">
+                <Clock className="w-5 h-5 text-blue-500" />
+                Duração: <span className="text-purple-400 font-black text-lg">{duration[0]} segundos</span> 
+                <span className="text-gray-500 text-sm">({Math.floor(duration[0] / 60)}:{(duration[0] % 60).toString().padStart(2, '0')})</span>
               </Label>
               <Slider
                 value={duration}
@@ -176,7 +177,7 @@ export function VideoGenerator() {
                 step={15}
                 className="w-full"
               />
-              <div className="flex justify-between text-xs text-gray-500 font-medium">
+              <div className="flex justify-between text-sm text-gray-500 font-bold">
                 <span>15s (Curto)</span>
                 <span>180s (Médio)</span>
                 <span>600s (Longo)</span>
@@ -185,30 +186,30 @@ export function VideoGenerator() {
 
             {/* Tabs de Configurações Avançadas */}
             <Tabs defaultValue="style" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 bg-black/50 border border-gray-800/50 p-1 rounded-lg">
-                <TabsTrigger value="style" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-md text-sm">
-                  <Palette className="w-4 h-4 mr-1.5" />
+              <TabsList className="grid w-full grid-cols-4 bg-black/70 border border-gray-800 p-1.5 rounded-xl">
+                <TabsTrigger value="style" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-lg text-sm font-bold">
+                  <Palette className="w-4 h-4 mr-2" />
                   Estilo
                 </TabsTrigger>
-                <TabsTrigger value="voice" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-md text-sm">
-                  <Mic className="w-4 h-4 mr-1.5" />
+                <TabsTrigger value="voice" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-lg text-sm font-bold">
+                  <Mic className="w-4 h-4 mr-2" />
                   Voz
                 </TabsTrigger>
-                <TabsTrigger value="visual" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-md text-sm">
-                  <ImageIcon className="w-4 h-4 mr-1.5" />
+                <TabsTrigger value="visual" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-lg text-sm font-bold">
+                  <ImageIcon className="w-4 h-4 mr-2" />
                   Visual
                 </TabsTrigger>
-                <TabsTrigger value="export" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-md text-sm">
-                  <Video className="w-4 h-4 mr-1.5" />
+                <TabsTrigger value="export" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-lg text-sm font-bold">
+                  <Video className="w-4 h-4 mr-2" />
                   Export
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="style" className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label className="text-gray-200 text-sm font-medium">Estilo Narrativo</Label>
+              <TabsContent value="style" className="space-y-4 mt-6">
+                <div className="space-y-3">
+                  <Label className="text-gray-200 text-base font-bold">Estilo Narrativo</Label>
                   <Select value={estiloNarrativo} onValueChange={(v: any) => setEstiloNarrativo(v)}>
-                    <SelectTrigger className="bg-black/50 border-gray-700/50 text-white h-11">
+                    <SelectTrigger className="bg-black/70 border-gray-700 text-white h-12 text-base font-medium">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-900 border-gray-700">
@@ -222,11 +223,11 @@ export function VideoGenerator() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="voice" className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label className="text-gray-200 text-sm font-medium">Tipo de Voz</Label>
+              <TabsContent value="voice" className="space-y-4 mt-6">
+                <div className="space-y-3">
+                  <Label className="text-gray-200 text-base font-bold">Tipo de Voz</Label>
                   <Select value={nivelVoz} onValueChange={(v: any) => setNivelVoz(v)}>
-                    <SelectTrigger className="bg-black/50 border-gray-700/50 text-white h-11">
+                    <SelectTrigger className="bg-black/70 border-gray-700 text-white h-12 text-base font-medium">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-900 border-gray-700">
@@ -239,11 +240,11 @@ export function VideoGenerator() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="visual" className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label className="text-gray-200 text-sm font-medium">Preset Visual</Label>
+              <TabsContent value="visual" className="space-y-4 mt-6">
+                <div className="space-y-3">
+                  <Label className="text-gray-200 text-base font-bold">Preset Visual</Label>
                   <Select value={presetVisual} onValueChange={(v: any) => setPresetVisual(v)}>
-                    <SelectTrigger className="bg-black/50 border-gray-700/50 text-white h-11">
+                    <SelectTrigger className="bg-black/70 border-gray-700 text-white h-12 text-base font-medium">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-900 border-gray-700">
@@ -256,41 +257,41 @@ export function VideoGenerator() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="export" className="space-y-4 mt-4">
-                <div className="space-y-3">
-                  <Label className="text-gray-200 text-sm font-medium">Formatos de Exportação</Label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <TabsContent value="export" className="space-y-4 mt-6">
+                <div className="space-y-4">
+                  <Label className="text-gray-200 text-base font-bold">Formatos de Exportação</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <Button 
                       variant={formatosExport.includes("vertical_tiktok") ? "default" : "outline"}
                       onClick={() => toggleFormato("vertical_tiktok")}
                       className={formatosExport.includes("vertical_tiktok") 
-                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-11" 
-                        : "bg-black/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 h-11"
+                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-12 font-bold" 
+                        : "bg-black/70 border-gray-700 text-gray-300 hover:bg-gray-800/70 h-12 font-bold"
                       }
                     >
-                      <Video className="w-4 h-4 mr-2" />
+                      <Video className="w-5 h-5 mr-2" />
                       Vertical
                     </Button>
                     <Button 
                       variant={formatosExport.includes("widescreen_youtube") ? "default" : "outline"}
                       onClick={() => toggleFormato("widescreen_youtube")}
                       className={formatosExport.includes("widescreen_youtube") 
-                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-11" 
-                        : "bg-black/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 h-11"
+                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-12 font-bold" 
+                        : "bg-black/70 border-gray-700 text-gray-300 hover:bg-gray-800/70 h-12 font-bold"
                       }
                     >
-                      <Video className="w-4 h-4 mr-2" />
+                      <Video className="w-5 h-5 mr-2" />
                       Widescreen
                     </Button>
                     <Button 
                       variant={formatosExport.includes("square_instagram") ? "default" : "outline"}
                       onClick={() => toggleFormato("square_instagram")}
                       className={formatosExport.includes("square_instagram") 
-                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-11" 
-                        : "bg-black/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 h-11"
+                        ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-0 h-12 font-bold" 
+                        : "bg-black/70 border-gray-700 text-gray-300 hover:bg-gray-800/70 h-12 font-bold"
                       }
                     >
-                      <Video className="w-4 h-4 mr-2" />
+                      <Video className="w-5 h-5 mr-2" />
                       Square
                     </Button>
                   </div>
@@ -299,13 +300,13 @@ export function VideoGenerator() {
             </Tabs>
 
             {/* Idioma */}
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2 text-gray-200 text-sm font-medium">
-                <Globe className="w-4 h-4 text-green-500" />
+            <div className="space-y-3">
+              <Label className="flex items-center gap-2 text-gray-200 text-base font-bold">
+                <Globe className="w-5 h-5 text-green-500" />
                 Idioma
               </Label>
               <Select value={idioma} onValueChange={(v: any) => setIdioma(v)}>
-                <SelectTrigger className="bg-black/50 border-gray-700/50 text-white h-11">
+                <SelectTrigger className="bg-black/70 border-gray-700 text-white h-12 text-base font-medium">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-900 border-gray-700">
@@ -317,13 +318,13 @@ export function VideoGenerator() {
             </div>
 
             {/* Publicação Automática */}
-            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-orange-500/5 to-red-500/5 rounded-lg border border-orange-500/20">
+            <div className="flex items-center justify-between p-5 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-xl border border-orange-500/30">
               <div className="space-y-1">
-                <Label htmlFor="auto-publish" className="flex items-center gap-2 text-gray-200 text-sm font-medium cursor-pointer">
-                  <Upload className="w-4 h-4 text-orange-500" />
+                <Label htmlFor="auto-publish" className="flex items-center gap-2 text-gray-200 text-base font-bold cursor-pointer">
+                  <Upload className="w-5 h-5 text-orange-500" />
                   Publicação Automática
                 </Label>
-                <p className="text-xs text-gray-500">Preparar metadata para upload direto</p>
+                <p className="text-sm text-gray-500 font-medium">Preparar metadata para upload direto</p>
               </div>
               <Switch 
                 id="auto-publish" 
@@ -336,16 +337,16 @@ export function VideoGenerator() {
             <Button 
               onClick={handleGenerate}
               disabled={isGenerating || !temaTitulo.trim()}
-              className="w-full bg-gradient-to-r from-red-600 via-red-700 to-purple-700 hover:from-red-700 hover:via-red-800 hover:to-purple-800 text-white font-bold py-7 text-lg shadow-2xl shadow-red-900/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-red-600 via-red-700 to-purple-700 hover:from-red-700 hover:via-red-800 hover:to-purple-800 text-white font-black py-8 text-xl shadow-2xl shadow-red-900/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isGenerating ? (
                 <>
-                  <Loader2 className="w-6 h-6 mr-3 animate-spin" />
+                  <Loader2 className="w-7 h-7 mr-3 animate-spin" />
                   Gerando Vídeo Dark...
                 </>
               ) : (
                 <>
-                  <Zap className="w-6 h-6 mr-3" />
+                  <Zap className="w-7 h-7 mr-3" />
                   Gerar Vídeo Profissional
                 </>
               )}
@@ -355,46 +356,46 @@ export function VideoGenerator() {
 
         {/* Output Card */}
         {showOutput && generationOutput && (
-          <Card className="bg-gradient-to-br from-green-900/30 via-emerald-900/30 to-green-950/30 border-green-700/50 shadow-2xl shadow-green-900/30 backdrop-blur-sm">
-            <CardHeader className="border-b border-green-700/30 pb-4">
-              <CardTitle className="flex items-center gap-2 text-green-400 text-xl">
-                <CheckCircle2 className="w-6 h-6" />
+          <Card className="bg-gradient-to-br from-green-900/40 via-emerald-900/40 to-green-950/40 border-green-700/50 shadow-2xl shadow-green-900/30 backdrop-blur-sm">
+            <CardHeader className="border-b border-green-700/30 pb-6">
+              <CardTitle className="flex items-center gap-3 text-green-400 text-2xl font-black">
+                <CheckCircle2 className="w-7 h-7" />
                 Vídeo Gerado com Sucesso!
               </CardTitle>
-              <CardDescription className="text-gray-300">Confira os detalhes da geração abaixo</CardDescription>
+              <CardDescription className="text-gray-300 text-base">Confira os detalhes da geração abaixo</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6 pt-6">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Video ID</p>
+            <CardContent className="space-y-8 pt-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Video ID</p>
                   <p className="font-mono text-xs text-green-400 truncate">{generationOutput.video_id}</p>
                 </div>
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Duração Total</p>
-                  <p className="font-bold text-white text-lg">{generationOutput.roteiro.duracao_total}s</p>
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Duração Total</p>
+                  <p className="font-black text-white text-2xl">{generationOutput.roteiro.duracao_total}s</p>
                 </div>
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Número de Cenas</p>
-                  <p className="font-bold text-white text-lg">{generationOutput.roteiro.num_cenas}</p>
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Número de Cenas</p>
+                  <p className="font-black text-white text-2xl">{generationOutput.roteiro.num_cenas}</p>
                 </div>
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Total de Frames</p>
-                  <p className="font-bold text-white text-lg">{generationOutput.storyboard.total_frames}</p>
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Total de Frames</p>
+                  <p className="font-black text-white text-2xl">{generationOutput.storyboard.total_frames}</p>
                 </div>
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Assets Gerados</p>
-                  <p className="font-bold text-white text-lg">{generationOutput.assets.length}</p>
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Assets Gerados</p>
+                  <p className="font-black text-white text-2xl">{generationOutput.assets.length}</p>
                 </div>
-                <div className="bg-black/30 p-4 rounded-lg border border-green-700/20">
-                  <p className="text-gray-400 text-xs mb-1">Qualidade</p>
-                  <p className="font-bold text-green-400 text-lg">{generationOutput.quality.originality_score}%</p>
+                <div className="bg-black/40 p-5 rounded-xl border border-green-700/30">
+                  <p className="text-gray-400 text-xs mb-2 font-bold">Qualidade</p>
+                  <p className="font-black text-green-400 text-2xl">{generationOutput.quality.originality_score}%</p>
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <Button 
                   onClick={handleDownloadJSON}
-                  className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold h-12"
+                  className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-black h-14 text-base"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Baixar JSON Completo
@@ -402,7 +403,7 @@ export function VideoGenerator() {
                 <Button 
                   variant="outline"
                   onClick={() => setShowOutput(false)}
-                  className="bg-black/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 h-12 px-6"
+                  className="bg-black/70 border-gray-700 text-gray-300 hover:bg-gray-800/70 h-14 px-8 font-bold"
                 >
                   Fechar
                 </Button>
@@ -413,36 +414,36 @@ export function VideoGenerator() {
       </div>
 
       {/* Painel Lateral */}
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Preview */}
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-950/90 border-gray-800/50 shadow-2xl backdrop-blur-sm">
-          <CardHeader className="border-b border-gray-800/50 pb-3">
-            <CardTitle className="flex items-center gap-2 text-sm text-white font-semibold">
-              <Eye className="w-5 h-5 text-cyan-500" />
+        <Card className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border-gray-800 shadow-2xl backdrop-blur-sm">
+          <CardHeader className="border-b border-gray-800 pb-4">
+            <CardTitle className="flex items-center gap-2 text-base text-white font-black">
+              <Eye className="w-6 h-6 text-cyan-500" />
               Preview
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-4">
-            <div className="aspect-[9/16] bg-gradient-to-br from-black to-gray-950 rounded-xl border border-gray-800/50 flex items-center justify-center overflow-hidden shadow-inner">
+          <CardContent className="pt-6">
+            <div className="aspect-[9/16] bg-gradient-to-br from-black via-gray-950 to-black rounded-2xl border border-gray-800 flex items-center justify-center overflow-hidden shadow-inner">
               {isGenerating ? (
                 <div className="text-center">
-                  <Loader2 className="w-16 h-16 mx-auto mb-3 animate-spin text-purple-500" />
-                  <p className="text-sm text-gray-400 font-medium">Gerando vídeo...</p>
-                  <p className="text-xs text-gray-600 mt-1">Aguarde alguns instantes</p>
+                  <Loader2 className="w-20 h-20 mx-auto mb-4 animate-spin text-purple-500" />
+                  <p className="text-base text-gray-400 font-bold">Gerando vídeo...</p>
+                  <p className="text-sm text-gray-600 mt-2">Aguarde alguns instantes</p>
                 </div>
               ) : showOutput ? (
-                <div className="text-center text-green-400 p-6">
-                  <CheckCircle2 className="w-16 h-16 mx-auto mb-3" />
-                  <p className="text-base font-bold">Vídeo Gerado!</p>
-                  <p className="text-xs text-gray-400 mt-2">
+                <div className="text-center text-green-400 p-8">
+                  <CheckCircle2 className="w-20 h-20 mx-auto mb-4" />
+                  <p className="text-lg font-black">Vídeo Gerado!</p>
+                  <p className="text-sm text-gray-400 mt-3 font-medium">
                     {generationOutput?.roteiro.num_cenas} cenas • {generationOutput?.roteiro.duracao_total}s
                   </p>
                 </div>
               ) : (
                 <div className="text-center text-gray-600">
-                  <Video className="w-16 h-16 mx-auto mb-3 opacity-30" />
-                  <p className="text-sm font-medium">Preview aparecerá aqui</p>
-                  <p className="text-xs text-gray-700 mt-1">Configure e gere seu vídeo</p>
+                  <Video className="w-20 h-20 mx-auto mb-4 opacity-30" />
+                  <p className="text-base font-bold">Preview aparecerá aqui</p>
+                  <p className="text-sm text-gray-700 mt-2">Configure e gere seu vídeo</p>
                 </div>
               )}
             </div>
@@ -450,32 +451,32 @@ export function VideoGenerator() {
         </Card>
 
         {/* Status do Sistema */}
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-950/90 border-gray-800/50 shadow-2xl backdrop-blur-sm">
-          <CardHeader className="border-b border-gray-800/50 pb-3">
-            <CardTitle className="text-sm text-white font-semibold">Status do Sistema</CardTitle>
+        <Card className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border-gray-800 shadow-2xl backdrop-blur-sm">
+          <CardHeader className="border-b border-gray-800 pb-4">
+            <CardTitle className="text-base text-white font-black">Status do Sistema</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 pt-4">
+          <CardContent className="space-y-4 pt-6">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-400 font-medium">AI Engine</span>
-              <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30 font-semibold">
+              <span className="text-gray-400 font-bold">AI Engine</span>
+              <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30 font-black">
                 GPT-5 Active
               </Badge>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-400 font-medium">Image Model</span>
-              <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30 font-semibold">
+              <span className="text-gray-400 font-bold">Image Model</span>
+              <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30 font-black">
                 SDXL Ready
               </Badge>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-400 font-medium">TTS Engine</span>
-              <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30 font-semibold">
+              <span className="text-gray-400 font-bold">TTS Engine</span>
+              <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30 font-black">
                 Ultra Realistic
               </Badge>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-400 font-medium">Storage</span>
-              <Badge variant="outline" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/30 font-semibold">
+              <span className="text-gray-400 font-bold">Storage</span>
+              <Badge variant="outline" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/30 font-black">
                 Supabase
               </Badge>
             </div>
@@ -483,33 +484,33 @@ export function VideoGenerator() {
         </Card>
 
         {/* Quick Tips */}
-        <Card className="bg-gradient-to-br from-purple-900/20 via-red-900/20 to-purple-950/20 border-purple-800/30 shadow-2xl shadow-purple-900/20 backdrop-blur-sm">
-          <CardHeader className="border-b border-purple-800/30 pb-3">
-            <CardTitle className="text-sm flex items-center gap-2 text-white font-semibold">
-              <Sparkles className="w-5 h-5 text-yellow-500" />
+        <Card className="bg-gradient-to-br from-purple-900/30 via-red-900/30 to-purple-950/30 border-purple-800/40 shadow-2xl shadow-purple-900/20 backdrop-blur-sm">
+          <CardHeader className="border-b border-purple-800/40 pb-4">
+            <CardTitle className="text-base flex items-center gap-2 text-white font-black">
+              <Sparkles className="w-6 h-6 text-yellow-500" />
               Dicas Profissionais
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2.5 text-xs text-gray-400 pt-4 leading-relaxed">
+          <CardContent className="space-y-3 text-sm text-gray-400 pt-6 leading-relaxed">
             <p className="flex items-start gap-2">
-              <span className="text-purple-500 mt-0.5">•</span>
-              <span>Vídeos curtos (15-60s) são ideais para TikTok/Reels</span>
+              <span className="text-purple-500 mt-1 font-bold">•</span>
+              <span className="font-medium">Vídeos curtos (15-60s) são ideais para TikTok/Reels</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-purple-500 mt-0.5">•</span>
-              <span>Use descrições detalhadas para melhores resultados</span>
+              <span className="text-purple-500 mt-1 font-bold">•</span>
+              <span className="font-medium">Use descrições detalhadas para melhores resultados</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-purple-500 mt-0.5">•</span>
-              <span>O estilo "Sinistro" é o mais popular</span>
+              <span className="text-purple-500 mt-1 font-bold">•</span>
+              <span className="font-medium">O estilo "Sinistro" é o mais popular</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-purple-500 mt-0.5">•</span>
-              <span>Lip sync adiciona +30% de engajamento</span>
+              <span className="text-purple-500 mt-1 font-bold">•</span>
+              <span className="font-medium">Lip sync adiciona +30% de engajamento</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-purple-500 mt-0.5">•</span>
-              <span>JSON completo inclui roteiro, storyboard e assets</span>
+              <span className="text-purple-500 mt-1 font-bold">•</span>
+              <span className="font-medium">JSON completo inclui roteiro, storyboard e assets</span>
             </p>
           </CardContent>
         </Card>
