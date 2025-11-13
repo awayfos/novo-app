@@ -1,70 +1,86 @@
-export interface VideoGenerationInput {
-  tema_titulo: string
-  duracao: number
-  idioma_principal: "pt" | "en" | "es"
-  formatos_export: ("vertical_tiktok" | "widescreen_youtube" | "square_instagram")[]
-  estilo_narrativo: "sinistro" | "psicológico" | "found_footage" | "documental" | "surreal"
-  nivel_voz: "deep_male" | "calm_female" | "neutral" | "whisper"
-  preset_visual: "vhs_grain" | "cinematic_dark" | "noir_highcontrast" | "minimal_animated"
-  publicar_automatico?: boolean
-  descricao_adicional?: string
-  actor_profile?: string
+// Dark Studio V46 Supreme - Type Definitions
+
+export interface VideoProject {
+  id: string;
+  userId: string;
+  prompt: string;
+  style: 'dark-cinematic' | 'dark-minimal' | 'dark-neon' | 'dark-horror';
+  duration: number;
+  status: 'draft' | 'generating' | 'rendering' | 'completed' | 'failed';
+  videoUrl?: string;
+  audioUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  metadata: ProjectMetadata;
 }
 
-export interface VideoGenerationOutput {
-  video_id: string
-  roteiro: {
-    titulo: string
-    duracao_total: number
-    num_cenas: number
-    cenas: Array<{
-      numero: number
-      duracao: number
-      descricao: string
-      narracao: string
-      som_ambiente: string
-      transicao: string
-    }>
-  }
-  storyboard: {
-    total_frames: number
-    frames_por_cena: number
-    cenas: any[]
-  }
-  assets: Array<{
-    tipo: string
-    url: string
-    cena: number
-  }>
-  audio: {
-    voz_principal: {
-      tipo: string
-      idioma: string
-      arquivo: string
-    }
-    trilha_sonora: string
-    sfx: any[]
-  }
-  lipsync: {
-    visemes: any[]
-    sincronizacao_ms: number
-  }
-  render_config: {
-    resolucao: string
-    fps: number
-    codec: string
-    formatos: string[]
-  }
-  metadata: {
-    thumbnail: string
-    titulo: string
-    descricao: string
-    hashtags: string[]
-  }
-  pipeline: string[]
-  quality: {
-    visual_coherence: number
-    lipsync_error_ms: number
-    originality_score: number
-  }
+export interface ProjectMetadata {
+  voiceId?: string;
+  voiceProvider?: 'elevenlabs' | 'custom';
+  videoProvider?: 'runway' | 'pika';
+  lipSync?: boolean;
+  colorGrading?: string;
+  audioMix?: AudioMixSettings;
+  renderSettings?: RenderSettings;
+}
+
+export interface AudioMixSettings {
+  voiceVolume: number;
+  ambientVolume: number;
+  musicVolume: number;
+  effectsVolume: number;
+}
+
+export interface RenderSettings {
+  resolution: '720p' | '1080p' | '4k';
+  fps: 24 | 30 | 60;
+  codec: 'h264' | 'h265' | 'vp9';
+  bitrate: number;
+}
+
+export interface AIAdaptiveSettings {
+  learningEnabled: boolean;
+  userPreferences: UserPreferences;
+  engagementMetrics: EngagementMetrics;
+  optimizationLevel: 'low' | 'medium' | 'high' | 'extreme';
+}
+
+export interface UserPreferences {
+  favoriteStyles: string[];
+  preferredVoices: string[];
+  avgDuration: number;
+  colorPalette: string[];
+}
+
+export interface EngagementMetrics {
+  totalProjects: number;
+  completionRate: number;
+  avgRenderTime: number;
+  userRating: number;
+  feedbackScore: number;
+}
+
+export interface GenerationRequest {
+  prompt: string;
+  style: string;
+  duration: number;
+  voiceId?: string;
+  lipSync?: boolean;
+  advanced?: Partial<ProjectMetadata>;
+}
+
+export interface GenerationResponse {
+  jobId: string;
+  status: string;
+  estimatedTime: number;
+  message: string;
+}
+
+export interface RenderProgress {
+  jobId: string;
+  stage: 'parsing' | 'video-gen' | 'audio-gen' | 'lip-sync' | 'mixing' | 'encoding';
+  progress: number;
+  eta: number;
+  currentFrame?: number;
+  totalFrames?: number;
 }
